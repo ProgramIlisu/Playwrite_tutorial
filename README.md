@@ -1,6 +1,6 @@
 # 🎭 Playwright UI Automation Project
 
-**Автоматизация UI-тестирования с использованием Playwright, Pytest и Allure Report**
+**Автоматизированный проект тестирования веб-приложения с использованием Playwright, Pytest, Page Object Model (POM) и Allure Report.**
 
 ---
 
