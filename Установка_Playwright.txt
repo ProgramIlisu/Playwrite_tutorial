@@ -1,0 +1,104 @@
+Установить Playwright с помощью менеджера пакетов pip
+pip install playwright
+
+Установите Pytest :
+pip install pytest
+
+Установите плагин Pytest :
+pip install pytest-playwright
+
+Чтобы управлять пакетами для интерпретатора Python, выберите File -> Settings -> Project: <project name>  -> Python Interpreter
+
+
+ВАЖНО
+Playwright требователен
+Установил Python 3.11 и в VirtualBox проставь RAM 6
+Еще я ставил
+nvm install 18.20.2
+nvm use 18.20.2
+И еще если ранее устанавливал то - Удаление ms-playwright почти всегда решает это.
+
+
+Чтобы установить на Python
+python -m playwright install chromium
+
+Для запуска codegen откройте терминал (Pycharm,  VScode),  введите  приведенную ниже команду и нажмите Enter.
+playwright codegen demo.playwright.dev/todomvc/#/
+
+Общий синтаксический формат для записи сценария выглядит так:
+
+codegen [параметры] [url]
+
+
+Узнать доступные опции и краткое их описание можно, выполнив команду
+playwright codegen --help
+
+===========================================================================================================================================================
+
+Если нужен debug с Inspector (PWDEBUG)
+
+$env:PWDEBUG=1
+pytest test_assertions.py
+
+Откроется:
+
+браузер
+Playwright Inspector
+выполнение остановится на шагах
+
+Команда для verbose + API логов
+
+В твоём случае (PowerShell):
+
+$env:DEBUG="pw:api"
+pytest -s -v test_assertions.py
+
+Разберём параметры:
+
+-v — verbose (подробный вывод)
+-s — отключает перехват вывода (показывает логи)
+DEBUG=pw:api — включает логирование Playwright API
+
+===========================================================================================================================================================
+
+Trace Viewer
+
+Как записать трассировку (самая практичная команда)
+
+В терминале:
+
+pytest --tracing=retain-on-failure
+
+Это режим:
+
+retain-on-failure
+
+Он:
+
+записывает trace для каждого теста
+удаляет trace успешных тестов
+оставляет trace только если тест упал
+
+Это стандартный production-режим.
+
+Как открыть Trace Viewer
+
+Команда:
+
+playwright show-trace test-results\test-assertions-py-test-todo-chromium\trace.zip  
+
+И откроется GUI:
+
+Trace Viewer
+
+Альтернатива — открыть онлайн
+
+Можно открыть в браузере:
+
+https://trace.playwright.dev
+
+И просто:
+
+перетащить trace.zip
+
+Это тот же viewer.
