@@ -1,0 +1,22 @@
+image: python:3.11
+
+stages:
+  - test
+
+playwright-tests:
+  stage: test
+
+  before_script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - playwright install --with-deps chromium
+
+  script:
+    - pytest project2/tests -s -v --alluredir=reports
+
+  artifacts:
+    when: always
+    paths:
+      - reports/
+    expire_in: 7 days
